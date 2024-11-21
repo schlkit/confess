@@ -5,8 +5,8 @@ from datetime import datetime
 from functools import wraps
 
 app = Flask(__name__, template_folder='.')
-app.secret_key = 'your-secret-key-here'
-ADMIN_PASSWORD = 'sigmasigmaonthewall'
+app.secret_key = os.environ.get('SECRET_KEY')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
 
 # Update database path to use Render's persistent storage
 DB_PATH = '/opt/render/project/data/confessions.db'
@@ -82,12 +82,16 @@ def submit_confession():
     if request.method == 'POST':
         confession_text = request.form.get('confessionText')
         if confession_text:
-            with sqlite3.connect(DB_PATH) as conn:
-                c = conn.cursor()
-                c.execute('INSERT INTO staging_confessions (text) VALUES (?)', (confession_text,))
-                conn.commit()
-            return '', 200  # Success response for AJAX request
-    return '', 400  # Error response for AJAX request
+            try:
+                with sqlite3.connect(DB_PATH) as conn:
+                    c = conn.cursor()
+                    c.execute('INSERT INTO staging_confessions (text) VALUES (?)', (confession_text,))
+                    conn.commit()
+                return '', 200  # Success response for AJAX
+            except Exception as e:
+                print(f"Database error: {str(e)}")
+                return str(e), 500
+    return '', 400
 
 @app.route('/admin')
 @require_admin
@@ -139,7 +143,12 @@ def admin_logout():
 
 @app.route('/<path:filename>')
 def serve_static(filename):
-    return send_from_directory('site', filename)
+    print(f"Serving static file: {filename}")
+    try:
+        return send_from_directory('site', filename)
+    except Exception as e:
+        print(f"Error serving {filename}: {str(e)}")
+        return f"Error: {str(e)}", 404
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

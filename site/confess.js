@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 form.reset();
                 alert('Your confession has been submitted for review!');
+                window.location.href = '/confess';
             } else {
                 throw new Error('Failed to submit confession');
             }
