@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Your Confession</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="confess.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">/confess</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="confession-form-container">
+                <form id="confessionForm" class="confession-form">
+                    <div class="form-header">
+                        <h1>Make Your Confession</h1>
+                        <p>Be honest. Be kind. Be anonymous.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea 
+                            id="confessionText" 
+                            class="confession-input" 
+                            placeholder="Type your confession here..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">CONFESS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="confess.js"></script>
+</body>
+</html>

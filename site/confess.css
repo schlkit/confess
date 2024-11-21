@@ -1,0 +1,137 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+
+/* Base styles */
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f0f0f0;
+    color: #1d1d1f;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #1d1d1f;
+    font-family: monospace;
+    text-decoration: none;
+}
+
+/* Main content */
+.main-content {
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.confession-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.confession-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1d1d1f;
+}
+
+.form-header p {
+    color: #86868b;
+    font-size: 1rem;
+}
+
+.confession-input {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.confession-input:focus {
+    outline: none;
+    border-color: #1d1d1f;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid #1d1d1f;
+    border-radius: 8px;
+    color: #1d1d1f;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #1d1d1f;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 100px;
+    }
+    
+    .confession-form-container {
+        padding: 1rem;
+    }
+    
+    .confession-form {
+        padding: 1.5rem;
+    }
+    
+    .form-header {
+        margin-bottom: 2rem;
+    }
+    
+    .form-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+}

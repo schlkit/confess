@@ -1,0 +1,307 @@
+/* Apple-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f=chillax@600&display=swap');
+@import url('https://api.fontshare.com/v2/css?f=cabinet-grotesk@700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f=clash-display@700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f=general-sans@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #ffffff;
+    color: #1d1d1f;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 1000;
+    color: #0d2642;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+b {
+    font-size: 3rem;
+    font-weight: 100;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+}
+/* Navbar styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #1d1d1f;
+    font-family: monospace;
+}
+
+.nav-link {
+    color: #1d1d1f;
+    font-weight: 500;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #0066cc;
+}
+
+/* Main Content */
+.main-content {
+    padding-top: 80px;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1d1d1f;
+    text-align: center;
+    letter-spacing: -0.03em;
+    transition: font-family 0.1s ease;
+}
+
+/* Confessions Feed */
+.confessions-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 0;
+}
+
+.confession-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.confession-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.confession-text {
+    font-size: 1.1rem;
+    color: #1d1d1f;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.confession-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f5f5f7;
+    font-size: 0.85rem;
+    color: #86868b;
+}
+
+.confession-time {
+    font-weight: 500;
+}
+
+.confession-author {
+    color: #86868b;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.confession-author:hover {
+    color: #1d1d1f;
+}
+
+.confession-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Floating Text */
+.floating-text {
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.floating-text p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+    font-weight: 400;
+    line-height: 1.4;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+    to {
+        opacity: 0.5;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .confessions-grid {
+        padding: 0 1rem;
+    }
+
+    .main-content {
+        padding-top: 100px;
+    }
+
+    .floating-text {
+        margin-bottom: 2rem;
+    }
+
+    .floating-text p {
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 0.4rem;
+        line-height: 1.4;
+        opacity: 0.5;
+    }
+}
+
+@media (min-width: 1401px) {
+    /* Desktop styles */
+    .floating-text {
+        position: fixed;
+        left: 5%;
+        top: 25%;
+        transform: translateY(-25%);
+        width: 300px;
+        text-align: left;
+    }
+
+    .floating-text p {
+        animation: fadeInUp 0.5s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .main-title {
+        font-size: 6rem;
+        margin-bottom: 3rem;
+    }
+}
+
+/* Preload fonts with font-display: swap */
+@font-face {
+    font-family: 'Syne';
+    src: url('https://fonts.gstatic.com/s/syne/v22/8vIS7w4qzmVxsWxjBZRjr0FKM_04uQ6tTY_9CQ.woff2') format('woff2');
+    font-display: swap;
+}
+
+/* Add similar preloads for other fonts */
+
+/* Confess Button */
+.confess-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    border: 2px solid #1d1d1f;
+    border-radius: 8px;
+    color: #1d1d1f;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+.confess-btn:hover {
+    background: #1d1d1f;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.confess-btn:active {
+    transform: translateY(0);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .confess-btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.8rem;
+    }
+}
+
+.no-confessions {
+    text-align: center;
+    padding: 2rem;
+    background: #f5f5f7;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.no-confessions p {
+    color: #86868b;
+    font-size: 1.1rem;
+    margin: 0;
+}
