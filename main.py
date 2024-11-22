@@ -19,6 +19,11 @@ def init_db():
     
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
+        
+        # Drop existing tables if they exist
+        c.execute('DROP TABLE IF EXISTS staging_confessions')
+        c.execute('DROP TABLE IF EXISTS live_confessions')
+        
         # Staging table for unapproved confessions
         c.execute('''CREATE TABLE IF NOT EXISTS staging_confessions
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,34 +54,34 @@ def require_admin(f):
 def home():
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
-        c.execute('''
-            SELECT text, color, timestamp 
-            FROM live_confessions 
-            ORDER BY timestamp DESC 
-            LIMIT 20
-        ''')
+        try:
+            c.execute('''
+                SELECT text, color, timestamp 
+                FROM live_confessions 
+                ORDER BY timestamp DESC 
+                LIMIT 20
+            ''')
+        except sqlite3.OperationalError:
+            # If color column doesn't exist, reinitialize the database
+            init_db()
+            c.execute('''
+                SELECT text, color, timestamp 
+                FROM live_confessions 
+                ORDER BY timestamp DESC 
+                LIMIT 20
+            ''')
+        
         confessions = c.fetchall()
         
         formatted_confessions = []
         for conf in confessions:
             conf_time = datetime.strptime(conf[2], '%Y-%m-%d %H:%M:%S')
-            time_diff = datetime.now() - conf_time
-            hours = time_diff.total_seconds() / 3600
-            
-            if hours < 1:
-                time_str = f"{int(time_diff.total_seconds() / 60)} minutes ago"
-            elif hours < 24:
-                time_str = f"{int(hours)} hours ago"
-            else:
-                days = int(hours / 24)
-                time_str = f"{days} days ago"
-            
             formatted_confessions.append({
                 'text': conf[0],
-                'color': conf[1],
-                'time': time_str
+                'color': conf[1] if len(conf) > 1 else 'white',  # Default to white if no color
+                'time': conf_time.strftime('%I:%M %p').lstrip('0')
             })
-            
+    
     return render_template('site/index.html', confessions=formatted_confessions)
 
 @app.route('/confess')
