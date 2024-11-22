@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anonymous Confessions</title>
+    <title>confess.lol</title>
     
     <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/styles.css">
     
@@ -19,12 +23,15 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">/confess</a>
+            <a class="navbar-brand" href="/">confess.lol</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/what">What is this</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/confess">Share yours</a>
                     </li>
@@ -36,18 +43,19 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">
-            <h1 class="main-title animate__animated animate__fadeIn">/confess</h1>
+            <h1 class="main-title animate__animated animate__fadeIn">confess.lol</h1>
             
             <div class="floating-text">
-                <p>Post what you want to whoever you want anonymously.</p>
+                <p>Anonymous posting for King's.</p>
                 <p>Everything is reviewed, and won't be posted if it is offensive or hateful.</p>
                 <a href="/confess" class="confess-btn">CONFESS</a>
+                <a href="/what" class="confess-btn">WHAT IS THIS</a>
             </div>
             
             <div class="confessions-grid">
                 {% if confessions %}
                     {% for confession in confessions %}
-                        <div class="confession-card animate__animated animate__fadeIn">
+                        <div class="confession-card animate__animated animate__fadeIn" data-color="{{ confession.color }}">
                             <p class="confession-text">"{{ confession.text }}"</p>
                             <div class="confession-meta">
                                 <div class="confession-time">{{ confession.time }}</div>
@@ -57,7 +65,7 @@
                     {% endfor %}
                 {% else %}
                     <div class="no-confessions">
-                        <p>No confessions yet. Be the first to confess!</p>
+                        <p>No posts yet. Be the first to post!</p>
                     </div>
                 {% endif %}
             </div>

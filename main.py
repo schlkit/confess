@@ -3,29 +3,34 @@ import sqlite3
 import os
 from datetime import datetime
 from functools import wraps
+from pathlib import Path
 
 app = Flask(__name__, template_folder='.')
 app.secret_key = os.environ.get('SECRET_KEY')
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
-
-# Update database path to use Render's persistent storage
-DB_PATH = '/opt/render/project/data/confessions.db'
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / 'data'
+DB_PATH = str(DATA_DIR / 'confessions.db') if not os.environ.get('RENDER') else '/opt/render/project/data/confessions.db'
 
 # Database initialization
 def init_db():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    # Create data directory if it doesn't exist
+    os.makedirs(DATA_DIR, exist_ok=True)
+    
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
         # Staging table for unapproved confessions
         c.execute('''CREATE TABLE IF NOT EXISTS staging_confessions
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      text TEXT NOT NULL,
+                     color TEXT DEFAULT 'white',
                      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
         
         # Live table for approved confessions
         c.execute('''CREATE TABLE IF NOT EXISTS live_confessions
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      text TEXT NOT NULL,
+                     color TEXT DEFAULT 'white',
                      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
         conn.commit()
 
@@ -45,7 +50,7 @@ def home():
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
         c.execute('''
-            SELECT text, timestamp 
+            SELECT text, color, timestamp 
             FROM live_confessions 
             ORDER BY timestamp DESC 
             LIMIT 20
@@ -54,7 +59,7 @@ def home():
         
         formatted_confessions = []
         for conf in confessions:
-            conf_time = datetime.strptime(conf[1], '%Y-%m-%d %H:%M:%S')
+            conf_time = datetime.strptime(conf[2], '%Y-%m-%d %H:%M:%S')
             time_diff = datetime.now() - conf_time
             hours = time_diff.total_seconds() / 3600
             
@@ -68,6 +73,7 @@ def home():
             
             formatted_confessions.append({
                 'text': conf[0],
+                'color': conf[1],
                 'time': time_str
             })
             
@@ -77,17 +83,23 @@ def home():
 def confess():
     return render_template('site/confess.html')
 
+@app.route('/what')
+def what():
+    return render_template('site/what.html')
+
 @app.route('/submit_confession', methods=['POST'])
 def submit_confession():
     if request.method == 'POST':
         confession_text = request.form.get('confessionText')
+        color = request.form.get('color', 'white')  # Get color from form
         if confession_text:
             try:
                 with sqlite3.connect(DB_PATH) as conn:
                     c = conn.cursor()
-                    c.execute('INSERT INTO staging_confessions (text) VALUES (?)', (confession_text,))
+                    c.execute('INSERT INTO staging_confessions (text, color) VALUES (?, ?)', 
+                            (confession_text, color))
                     conn.commit()
-                return '', 200  # Success response for AJAX
+                return '', 200
             except Exception as e:
                 print(f"Database error: {str(e)}")
                 return str(e), 500
@@ -107,12 +119,13 @@ def admin():
 def approve_confession(confession_id):
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
-        # Get the confession text
-        c.execute('SELECT text FROM staging_confessions WHERE id = ?', (confession_id,))
+        # Get the confession text and color
+        c.execute('SELECT text, color FROM staging_confessions WHERE id = ?', (confession_id,))
         confession = c.fetchone()
         if confession:
-            # Move to live database
-            c.execute('INSERT INTO live_confessions (text) VALUES (?)', (confession[0],))
+            # Move to live database with color
+            c.execute('INSERT INTO live_confessions (text, color) VALUES (?, ?)', 
+                     (confession[0], confession[1]))
             # Delete from staging
             c.execute('DELETE FROM staging_confessions WHERE id = ?', (confession_id,))
             conn.commit()

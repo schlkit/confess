@@ -1,0 +1,168 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+
+/* Base styles */
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f0f0f0;
+    color: #1d1d1f;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #1d1d1f;
+    font-family: monospace;
+    text-decoration: none;
+}
+
+/* Main content */
+.main-content {
+    padding-top: 120px;
+    min-height: 100vh;
+}
+
+.info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #1d1d1f;
+}
+
+.info-section {
+    margin-bottom: 3rem;
+}
+
+h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1d1d1f;
+}
+
+.info-section b {
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #1d1d1f;
+    display: block;
+    padding: 1rem;
+    background: #f3fcff;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+    margin: 1rem 0;
+    line-height: 1.8;
+}
+
+/* Steps */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.step {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f5f5f7;
+    border-radius: 12px;
+}
+
+.step-number {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    background: #1d1d1f;
+    color: white;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* Principles list */
+.principles-list {
+    list-style: none;
+    padding: 0;
+}
+
+.principles-list li {
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.principles-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #81a2d4;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.confess-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 2px solid #1d1d1f;
+    border-radius: 8px;
+    color: #1d1d1f;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+.confess-btn:hover {
+    background: #1d1d1f;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .info-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+}

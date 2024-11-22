@@ -81,8 +81,8 @@ b {
 }
 
 .nav-link {
-    color: #1d1d1f;
-    font-weight: 500;
+    color: #000000;
+    font-weight: 600;
     margin: 0 1rem;
     transition: color 0.3s ease;
 }
@@ -93,14 +93,15 @@ b {
 
 /* Main Content */
 .main-content {
-    padding-top: 80px;
+    padding-top: 120px;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f3f3f3;
 }
 
 .main-title {
     font-size: 3rem;
     font-weight: 800;
+    margin-top: 2rem;
     margin-bottom: 3rem;
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #1d1d1f;
@@ -120,11 +121,31 @@ b {
 }
 
 .confession-card {
-    background: white;
+    background: white;  /* Default color */
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.confession-card[data-color="white"] {
+    background: white;
+}
+
+.confession-card[data-color="pink"] {
+    background: linear-gradient(135deg, rgba(255,183,197,0.15), white);
+}
+
+.confession-card[data-color="peach"] {
+    background: linear-gradient(135deg, rgba(255,218,185,0.15), white);
+}
+
+.confession-card[data-color="mint"] {
+    background: linear-gradient(135deg, rgba(189,252,201,0.15), white);
+}
+
+.confession-card[data-color="blue"] {
+    background: linear-gradient(135deg, rgba(181,234,255,0.15), white);
 }
 
 .confession-card:hover {
@@ -195,10 +216,35 @@ b {
     }
 }
 
+@keyframes rainbowShift {
+    0% {
+        background: white;
+    }
+    15% {
+        background: linear-gradient(135deg, rgba(255,183,197,0.8), white);
+    }
+    30% {
+        background: linear-gradient(135deg, rgba(255,218,185,0.8), white);
+    }
+    45% {
+        background: linear-gradient(135deg, rgba(189,252,201,0.8), white);
+    }
+    60% {
+        background: linear-gradient(135deg, rgba(181,234,255,0.8), white);
+    }
+    75% {
+        background: linear-gradient(135deg, rgba(200,181,255,0.8), white);
+    }
+    100% {
+        background: white;
+    }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .main-title {
         font-size: 3rem;
+        margin-top: 1rem;
         margin-bottom: 2rem;
     }
     
@@ -207,7 +253,7 @@ b {
     }
 
     .main-content {
-        padding-top: 100px;
+        padding-top: 140px;
     }
 
     .floating-text {
