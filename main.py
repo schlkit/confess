@@ -20,18 +20,13 @@ def init_db():
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
         
-        # Drop existing tables if they exist
-        c.execute('DROP TABLE IF EXISTS staging_confessions')
-        c.execute('DROP TABLE IF EXISTS live_confessions')
-        
-        # Staging table for unapproved confessions
+        # Create tables only if they don't exist
         c.execute('''CREATE TABLE IF NOT EXISTS staging_confessions
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      text TEXT NOT NULL,
                      color TEXT DEFAULT 'white',
                      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
         
-        # Live table for approved confessions
         c.execute('''CREATE TABLE IF NOT EXISTS live_confessions
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      text TEXT NOT NULL,
